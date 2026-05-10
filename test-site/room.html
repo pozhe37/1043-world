@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/styles/home.css">
+        <title>1043's world</title>
+          <style>
+
+              .content-area {
+                  display: flex;
+                  flex-direction: row;
+                  gap: 20px;
+                  flex: 1;
+                  height: 600px;
+              }
+              .left-content {
+                  width: 40%;
+                  height: 700px;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 20px;
+                  border-radius: 8px;
+                  border: dashed #f3d187;
+                  border-width:2px;
+                  background: #f8eed1ab;
+                  padding: 10px;
+              }
+              .anime-title {
+                  font-size: 24px;
+                  font-weight: bold;
+                  text-align: center;
+                  margin-bottom: 15px;
+                  color: #693a00;
+              }
+              .anime-container {
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 20px;
+                  overflow-y: auto;
+              }
+              .anime-item {
+                  padding:6px; 
+                  display: flex;
+                  gap: 15px;
+                  align-items: flex-start;
+              }
+              .anime-item:nth-child(odd) .anime-image {
+                  order: 1;
+              }
+              .anime-item:nth-child(odd) .anime-text {
+                  order: 2;
+                  flex: 1;
+              }
+              .anime-item:nth-child(even) .anime-image {
+                  order: 2;
+              }
+              .anime-item:nth-child(even) .anime-text {
+                  order: 1;
+                  flex: 1;
+              }
+              .anime-image {
+                  width: 150px;
+                  height: 200px;
+                  border-radius: 8px;
+                  overflow: hidden;
+                  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+              }
+              .anime-image img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+              }
+              .anime-text {
+                  flex: 2;
+              }
+              .anime-text h3 {
+                  font-size: 20px;
+                  margin-top: 3px;
+                  color: #693a00;
+              }
+              .anime-text p {
+                  font-size: 16px;
+                  line-height: 1.5;
+                  color: #693a00;
+              }
+              .right-content {
+                  width: 60%;
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  grid-template-rows: repeat(5, auto);
+                  gap: 20px;
+                  padding: 10px;
+              }
+              .novel-section {
+                  grid-column: 1 / 2;
+                  grid-row: 1 / 4;
+                  background-color: rgba(247, 232, 182, 0.548);
+                  border-radius: 8px;
+                  padding: 15px;
+                  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                  height: 270px;
+                  overflow-y: auto;
+                  border: dotted #c97f0f;
+                  border-width:1.5px;
+              }
+              .anime-section {
+                  grid-column: 2 / 3;
+                  grid-row: 1 / 5;
+                  background-color: rgba(247, 232, 182, 0.548);
+                  border-radius: 8px;
+                  padding: 15px;
+                  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                  height: 350px;
+                  overflow-y: auto;
+                  border: dotted #c97f0f;
+                  border-width:1.5px;
+              }
+              .game-section {
+                  grid-column: 1 / 2;
+                  grid-row: 4 / 8;
+                  background-color: rgba(247, 232, 182, 0.548);
+                  border-radius: 8px;
+                  padding: 15px;
+                  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                  height: 350px;
+                  overflow-y: auto;
+                  border: dotted #c97f0f;
+                  border-width:1.5px;
+              }
+              .other-section {
+                  grid-column: 2 / 3;
+                  grid-row: 5 / 8;
+                  background-color: rgba(247, 232, 182, 0.548);
+                  border-radius: 8px;
+                  padding: 15px;
+                  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                  height: 270px;
+                  overflow-y: auto;
+                  border: dotted #c97f0f;
+                  border-width:1.5px;
+              }
+              .section-title {
+                  font-size: 18px;
+                  color: #693a00;
+                  font-weight: bold;
+                  margin-bottom: 10px;
+                  padding-bottom: 8px;
+                  border-bottom: 2px solid rgba(0,0,0,0.1);
+              }
+              .section-content {
+                  font-size: 16px;
+                  line-height: 1.6;
+                  color: #5b3606;
+              }
+
+              /* 自定义滚动条样式 */
+              .anime-container::-webkit-scrollbar,
+              .novel-section::-webkit-scrollbar,
+              .anime-section::-webkit-scrollbar,
+              .game-section::-webkit-scrollbar,
+              .other-section::-webkit-scrollbar {
+                  width: 8px;
+                  height: 8px;
+              }
+
+              .anime-container::-webkit-scrollbar-track,
+              .novel-section::-webkit-scrollbar-track,
+              .anime-section::-webkit-scrollbar-track,
+              .game-section::-webkit-scrollbar-track,
+              .other-section::-webkit-scrollbar-track {
+                  background: #f1e8c8;
+                  border-radius: 4px;
+              }
+
+              .anime-container::-webkit-scrollbar-thumb,
+              .novel-section::-webkit-scrollbar-thumb,
+              .anime-section::-webkit-scrollbar-thumb,
+              .game-section::-webkit-scrollbar-thumb,
+              .other-section::-webkit-scrollbar-thumb {
+                  background: #cea971;
+                  border-radius: 4px;
+                  border: 2px solid #f1e8c8;
+              }
+
+              .anime-container::-webkit-scrollbar-thumb:hover,
+              .novel-section::-webkit-scrollbar-thumb:hover,
+              .anime-section::-webkit-scrollbar-thumb:hover,
+              .game-section::-webkit-scrollbar-thumb:hover,
+              .other-section::-webkit-scrollbar-thumb:hover {
+                  background: #e39f40;
+              }
+
+          </style>
+    </head>
+    <body>
+       
+        <header>
+            <div class="float">1043's net!</div>
+        </header>
+        <div class="content-wrapper">
+            <nav>
+                <ul>
+                    <li><a href="/index.html">home</a></li>
+                    <li><a href="/test-site/musics.html">musics</a></li>
+                    <li><a href="/test-site/room.html">room</a></li>
+                    <li><a href="/test-site/oc.html">my oc!</a></li>
+                    <li><a href="/test-site/guestbook.html">guestbook</a></li>
+                </ul>
+                <img src="/images/songcat2.gif" alt="Song Cat" style="margin-top: 150px; width: 60%; display: block; margin-left: auto; margin-right: auto;">
+            </nav>
+            <main>
+                <div class="content-area">
+                    <div class="left-content">
+                        <div class="anime-title">海报墙（我最喜欢的5部动漫）</div>
+                        <div class="anime-container">
+                            <div class="anime-item">
+                                <div class="anime-image">
+                                    <img src="/images/结界师.jpg" alt="结界师">
+                                </div>
+                                <div class="anime-text">
+                                    <h3>1. 结界师</h3>
+                                    <p>一部非常细腻温暖的作品，不论是从世界观的构建还是角色的塑造都做得非常出色。从小学到现在我已经看了这部作品将近十遍，但每次看到固定的情节依然会被深深打动。故事中对于主角能力的提升设计得也非常有意思，不光光有通过战斗提升的力量，还有为了解决不同问题而领悟到的结界术的多种应用。</p>
+                                </div>
+                            </div>
+                            <div class="anime-item">
+                                <div class="anime-image">
+                                    <img src="/images/anime2.jpg" alt="无头骑士异闻录">
+                                </div>
+                                <div class="anime-text">
+                                    <h3>2. 无头骑士异闻录</h3>
+                                    <p>因为是群像+独特的叙事方式所以非常喜欢。感谢成田良悟编织出了这么一个光怪陆离又热闹非凡的世界，带给我不少欢乐，也促使我在日复一日的生活中做出了一些细微的改变。现在上水课我有时也会登上聊天室网站挂机，某种意义上我也是Dollars的一员了呢，聊天室里有好多有趣的人！</p>
+                                </div>
+                            </div>
+                            <div class="anime-item">
+                                <div class="anime-image">
+                                    <img src="/images/anime3.jpg" alt="灵能百分百">
+                                </div>
+                                <div class="anime-text">
+                                    <h3>3. 灵能百分百</h3>
+                                    <p>大学期间看的剧情最喜欢的动漫，独一无二的角色塑造带给了我不少欢乐与感动。喜欢这部作品主要原因一是看着剧中的角色相互包容相互支持感觉很温暖，二是剧中的故事和台词确实让我有了更多的动力去尝试进行一些改变、离开自己的舒适圈去感受了一些新的美好的东西。</p>
+                                </div>
+                            </div>
+                                <div class="anime-item">
+                                <div class="anime-image">
+                                    <img src="/images/anime4.jpg" alt="奇诺之旅">
+                                </div>
+                                <div class="anime-text">
+                                    <h3>4. 奇诺之旅</h3>
+                                    <p>因为个人很喜欢看讽刺、怪诞的小故事所以这部作品非常合我胃口。个人感觉里面出现的虚构国家大多为将社会中的某些意识形态扩大化和具象化的体现，非常有意思，在观看的过程中我也跟着剧中出现的台词思考了许多。</p>
+                                </div>
+                            </div>
+                            <div class="anime-item">
+                                <div class="anime-image">
+                                    <img src="/images/anime5.jpg" alt="摇曳露营">
+                                </div>
+                                <div class="anime-text">
+                                    <h3>5. 摇曳露营</h3>
+                                    <p>吃饭的时候经常看，看着屏幕里面角色之间温馨的互动就会觉得开心，画面和配乐做的也好好，让人觉得平静舒适。由于已经看了很多遍导致现在虽然一二季在a站上被下架了，但在其他地方看的时候还能自动脑补出原来大致的弹幕。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-content">
+                        <div class="content-section novel-section">
+                            <div class="section-title">书</div>
+                            <div class="section-content">
+                               <p>看过的喜欢的书：夜莺与玫瑰、黑塞童话集、送你一颗子弹、真幌站前三部曲、献给阿尔吉侬的花束、华氏451、九故事</p>
+                                <p>看了一部分不知道什么时候看完：飞跃疯人院、海伯利安、呼吸、弗兰妮与祖伊、世界尽头与冷酷仙境、银河英雄传说、梦的宇宙志、1984</p>
+                                <p>想看：索拉里斯星、鲵鱼之乱、秋花</p> 
+                            </div>
+                        </div>
+                        <div class="content-section anime-section">
+                            <div class="section-title">看过的动漫</div>
+                            <div class="section-content">
+                                <p>日常类：日常、男子高中生的日常、女子高中生的虚度日常、幸运星、阿兹漫画大王<br>非日常：无头骑士异闻录、凉宫春日的忧郁<br>群像：永生之酒、目隐都市的演绎者、我们大家的河合庄<br>奇幻：×××HOLiC、迷宫饭、末日后酒店、结界师、噬魂师<br>超能力：灵能百分百、齐木楠雄的灾难<br>少女乐队番：BanG Dream!（第一季）、孤独摇滚、gbc <br>科幻：命运石之门、攻壳机动队<br>想不出分类了剩下的都放这：平家物语、钢之炼金术师fa、混沌武士、漂流少年、魔法少女小圆、奇诺之旅、少女终末之旅、比宇宙更远的地方、摇曳露营、异度侵入、异国日记、编舟记、重启咲良田、ReLIFE、死亡笔记、银河英雄传说</p>
+                            </div>
+                        </div>
+                        <div class="content-section other-section">
+                            <div class="section-title">其他</div>
+                            <div class="section-content">
+                                <p>我平常还爱看：<strong>英/美剧：</strong>神探夏洛克、迷探路德维希、9号秘事、真探（第一季）、绝命毒师<br><strong>日剧：</strong>真幌站系列、交响情人梦、四重奏<br><strong>coc跑团replay：</strong>歌味觉死的<em>淤泥之花与空心石</em>、<em>路易斯安娜系列</em>、柴田一只羊的<em>CuC桌</em>、乔秋秋发布的<em>欲望之箱</em>、鹊国王的<em>明港市灵异调查组</em><br><strong>恐怖电影：</strong>近期我偶然观看了<em>惊魂记</em>，发现观看恐怖电影也许对缓解情绪低落有奇效，看完之后我感觉很兴奋，执行力相对观影前也有所提升，非常奇妙的体验，之后我也许会尝试观看更多的黑白恐怖电影。</p>                               
+                            </div>
+                        </div>
+                        <div class="content-section game-section">
+                            <div class="section-title">游戏</div>
+                            <div class="section-content">
+                                <p>游戏库里有很多游戏但只完了其中的一小部分，玩过的有：星露谷物语（热衷下矿和钓鱼，玩了快350个小时）、泰拉瑞亚（我纯当作生物收集和钓鱼游戏来玩了）、潜水员戴夫、渔帆暗涌、动物井、空洞骑士、怪物圣所、逆转裁判123、p5r、节奏医生、诺科、你好夏洛特（画风和剧情都非常喜欢）、Z.A.T.O、骰子浪游者、极乐迪斯科</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <footer>
+            <p> 2026 1043's world. </p>
+        </footer>
+    </body>
+</html>

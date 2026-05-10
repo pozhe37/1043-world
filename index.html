@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <title>1043's world</title>
+          <style>
+              body {
+                  background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='20' height='43.5' patternTransform='scale(1) rotate(90)'><rect x='0' y='0' width='100%' height='100%' fill='%23ffdd00ff'/><path d='M0 20v20h20V20zm10.135 4.9l1.342 3.579 3.845.312-2.996 2.506.897 3.8-3.268-2.056L6.736 35.1l.985-3.848-3.043-2.504 3.935-.18z'  stroke-width='1' stroke='none' fill='%23ffeb89ff'/><path d='M0 0v20h20V0zm10.135 4.9l1.342 3.579 3.845.312-2.996 2.506.897 3.8-3.268-2.056L6.736 15.1l.985-3.848-3.043-2.504 3.935-.18z'  stroke-width='1' stroke='none' fill='%23f2ca99ff'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(%23a)'/></svg>");
+                  font-family: Arial, sans-serif;
+                  margin: 0;
+                  padding: 0;
+                  display: flex;
+                  flex-direction: column;
+                  min-height: 100vh;
+              }
+              header {
+                  background-color: #f7d76d;
+                  color: rgb(248, 167, 37);
+                  padding: 20px;
+                  text-align: center;
+              }
+              .float {
+                    font: calibri, sans-serif;
+                    font-size: 56px;
+                    text-shadow: rgb(255, 255, 253) 5px 0px 0px, rgb(255, 255, 253) 4.90033px 0.993347px 0px, rgb(255, 255, 253) 4.60531px 1.94709px 0px, rgb(255, 255, 253) 4.12668px 2.82321px 0px, rgb(255, 255, 253) 3.48353px 3.58678px 0px, rgb(255, 255, 253) 2.70151px 4.20736px 0px, rgb(255, 255, 253) 1.81179px 4.6602px 0px, rgb(255, 255, 253) 0.849836px 4.92725px 0px, rgb(255, 255, 253) -0.145998px 4.99787px 0px, rgb(255, 255, 253) -1.13601px 4.86924px 0px, rgb(255, 255, 253) -2.08073px 4.54649px 0px, rgb(255, 255, 253) -2.94251px 4.04248px 0px, rgb(255, 255, 253) -3.68697px 3.37732px 0px, rgb(255, 255, 253) -4.28444px 2.57751px 0px, rgb(255, 255, 253) -4.71111px 1.67494px 0px, rgb(255, 255, 253) -4.94996px 0.7056px 0px, rgb(255, 255, 253) -4.99147px -0.291871px 0px, rgb(255, 255, 253) -4.83399px -1.27771px 0px, rgb(255, 255, 253) -4.48379px -2.2126px 0px, rgb(255, 255, 253) -3.95484px -3.05929px 0px, rgb(255, 255, 253) -3.26822px -3.78401px 0px, rgb(255, 255, 253) -2.4513px -4.35788px 0px, rgb(255, 255, 253) -1.53666px -4.75801px 0px, rgb(255, 255, 253) -0.560763px -4.96845px 0px, rgb(255, 255, 253) 0.437495px -4.98082px 0px, rgb(255, 255, 253) 1.41831px -4.79462px 0px, rgb(255, 255, 253) 2.34258px -4.41727px 0px, rgb(255, 255, 253) 3.17346px -3.86382px 0px, rgb(255, 255, 253) 3.87783px -3.15633px 0px, rgb(255, 255, 253) 4.4276px -2.32301px 0px, rgb(255, 255, 253) 4.80085px -1.39708px 0px, rgb(255, 255, 253) 4.98271px -0.415447px 0px;
+                    animation-name: floating;
+                    animation-duration: 5s;
+                    animation-iteration-count: infinite;
+                    animation-timing-function: ease-in-out;
+                    }
+
+                    @keyframes floating {
+                    0% { transform: translate(0, 0px); }
+                    50% { transform: translate(0, 15px); }
+                    100% { transform: translate(0, -0px); }
+              }
+              .content-wrapper {
+                  display: flex;
+                  flex: 1;
+                  background-color: rgba(255, 255, 224, 0.6);
+              }
+              nav {
+                   background-color: #e39c3fd4;
+                   width: 200px;
+                   font-size: 24px;
+                   flex-shrink: 0;
+              }
+              nav ul {
+                  list-style-type: none;
+                  margin: 0;
+                  padding: 0;
+              }
+              nav ul li {
+                  width: 100%;
+                  margin-bottom: 10px;
+              }
+              nav ul li a {
+                  display: block;
+                  color: white;
+                  text-align: center;
+                  padding: 15px 0;
+                  text-decoration: none;
+                  border-bottom: 1px solid rgba(255,255,255,0.1);
+              }
+              nav ul li a:hover {
+                  background-color: rgba(255,255,255,0.2);
+              }
+              main {
+                  flex: 1;
+                  padding: 30px;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 20px;
+              }
+              article {
+                  background-color: rgba(240, 217, 142, 0.525);
+                  color: rgb(105, 58, 0);
+                  padding: 20px;
+                  border-radius: 5px;
+                  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                  font-size: 17px;
+                h2 {
+                  color: #d48f61;
+                  width: 380px;
+                }  
+              }
+              
+              aside {
+                  background-color: rgba(221, 221, 221, 0.8);
+                  padding: 20px;
+                  border-radius: 5px;
+                  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+              }
+              .content-area {
+                  display: flex;
+                  gap: 20px;
+                  flex: 1;
+              }
+              .articles-container {
+                  flex: 3;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 20px;
+              }
+              .sidebar {
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+              }
+              footer {
+                  background-color: #f5d45e;
+                  color: white;
+                  text-align: center;
+                  padding: 10px 0;
+              }
+              .hello-container {
+                  position: relative;
+                  display: inline-block;
+                  margin-left: auto;
+                  margin-right: 0;
+              }
+              .hello-text {
+                  display: none;
+                  position: absolute;
+                  right: 100%;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  background-color: rgba(255, 255, 255, 0.9);
+                  padding: 10px 15px;
+                  border-radius: 5px;
+                  font-size: 18px;
+                  color: #d48f61;
+                  white-space: nowrap;
+                  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+                  margin-right: 10px;
+              }
+              .hello-container:hover .hello-text {
+                  display: block;
+              }
+              .pet-links {
+                  display: flex;
+                  gap: 50px;
+                  margin-top: 10px;
+              }
+              .tests {
+                  border: 2px solid #e6c773;
+                  border-radius: 10px;
+                  padding: 20px;
+                  margin-top: 20px;
+                  height: 280px;
+                  overflow-y: auto;
+                  background-color: #f4eab7d6;
+                  text-align: center;
+              }
+              .tests h3 {
+                  background-color: #f8eabb;
+                  padding: 10px;
+                  border-radius: 5px;
+                  margin-top: 0;
+              }
+              .button {
+                  border: 2px solid #f7d76d;
+                  border-radius: 8px;
+                  padding: 8px 15px;
+                  margin-top: 10px;
+                  background-color: rgba(255, 255, 224, 0.6);
+                  display: inline-flex;
+                  align-items: center;
+                  cursor: pointer;
+                  transition: background-color 0.3s;
+              }
+              .button:hover {
+                  background-color: rgba(247, 215, 109, 0.4);
+              }
+              .button-text {
+                  margin-right: 10px;
+                  font-size: 14px;
+                  color: #693a00;
+              }
+              .button img {
+                  vertical-align: middle;
+              }
+          </style>
+    </head>
+    <body>
+        <audio id="bgMusic" autoplay loop>
+            <source src="/musics/スケーターズワルツ.mp3" type="audio/mpeg">
+        </audio>
+        <header>
+            <div class="float">1043's net!</div>
+        </header>
+        <div class="content-wrapper">
+            <nav>
+                <ul>
+                    <li><a href="/index.html">home</a></li>
+                    <li><a href="/test-site/musics.html">musics</a></li>
+                    <li><a href="/test-site/room.html">room</a></li>
+                    <li><a href="/test-site/oc.html">my oc!</a></li>
+                    <li><a href="/test-site/guestbook.html">guestbook</a></li>
+                </ul>
+                <img src="/images/songcat2.gif" alt="Song Cat" style="margin-top: 150px; width: 60%; display: block; margin-left: auto; margin-right: auto;">
+            </nav>
+            <main>
+                <div class="content-area">
+                    <div class="articles-container">
+                        <article>
+                            <h2>欢迎来到我的网站，请随意参观o(^▽^)o~</h2>
+                            <p>此网站用于记录我对于我所喜爱之物的感想。许久未见或素未谋面的朋友，恭喜你找到了这里，如果我写下的这些碎碎念能成为你打发时光或获取娱乐的好材料的话，那真是再好不过了。</p>
+                            <p>此网站创建于2026年4月，我大学在校的最后一个学期期间。在开启下一种生活方式之前，我制作了此网站做为一个存档，用以存放我学生时代喜爱的事物，以及我在收听/观看它们时脑子里幼稚奇怪的想法，也将这些内容分享给点开网站的你们。除此之外，这个网站也相当于我的一个电子日记本，之后我也许会在这里记录一些日常吐槽，书评，看番感想等，欢迎常来访问！</p>
+                        </article>
+                        <article>
+                            <h2>关于1043/我</h2>
+                            <p><strong>1043：</strong>一时兴起取的不知所以的名字，可能是边拿快递时边想的，因为本人收件名是张三，所以想着取个带数字又顺口的名字，故取名为石四三（1043）。</p>
+                            <p><strong>关于我：</strong>日常娱乐的方式主要为听音乐、看动漫、玩单机游戏。无论是在线上还是线下的社交程度都很低，大部分时间都在网上看东看西。之前忘记是在哪里看到了类似"思考只有在外部被记录下来才能稳定存在"的话，后觉得我此前对信息一直只有接收而缺少输出，尽管大学期间观看了许多精彩的作品但看的过程都几乎等同于囫囵吞枣。创建此网站也是我将自己想法进行输出的一种尝试。</p>
+                        </article>
+                        <div class="pet-links">
+                            <a href="https://tamanotchi.world/31991c"><img src="https://tamanotchi.world/i2/31991" alt="It's tamaNOTchi! Click to feed!" target="_blank"></a>
+                            <div class="button">
+                                <span class="button-text">my website button</span>
+                                <img src="/images/1043.png" alt="Button Image" style="height: 30px; width: auto; max-width: 100%; object-fit: contain;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar">
+                        <aside>
+                            <h2>Todo</h2>
+                            <ul>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </aside>
+                        <div class="hello-container">
+                            <img src = "/images/hello.gif" alt="Profile Image" style="height: 200px; width: auto; max-width: 100%; object-fit: contain;">
+                            <div class="hello-text">hello every-nyan</div>
+                        </div>
+                        <div class="tests">
+                            <h3>一些小测试-.-</h3>
+                            <A href="https://www.theotaku.com/quizzes/view/3658/which_minecraft_mob_are_you%3F"><img border="0" src="http://www.theotaku.com/guru_results/3658_Spider.jpg" alt="Which Minecraft Mob Are You?" /><br /></a><A href="https://www.theotaku.com/quizzes/view/3658/which_minecraft_mob_are_you%3F">Which Minecraft Mob Are You?</A><br />Hosted By theOtaku.com: <a href="http://www.theotaku.com" title="Anime">Anime</a>
+                            <A href="https://www.theotaku.com/quizzes/view/3458/what_type_of_cookie_are_you%3F"><img border="0" src="http://www.theotaku.com/guru_results/3458_Oatmeal.jpg" alt="What Type Of Cookie Are You?" /><br /></a><A href="https://www.theotaku.com/quizzes/view/3458/what_type_of_cookie_are_you%3F">What Type Of Cookie Are You?</A><br />Hosted By theOtaku.com: <a href="http://www.theotaku.com" title="Anime">Anime</a>
+                            <a href="http://www.nerdtests.com/mq/uttake.php?id=293805">
+                                <img src="http://www.nerdtests.com/mq/badge/1264a62bcc862d33.jpg" border="0" alt="Are You A Nerd? -- Make and Take a Fun Quiz @ NerdTests.com's User Tests!" title="The  Test -- Make and Take a Fun Quiz @ NerdTests.com's User Tests!">
+                            </a>
+                            <a href="http://www.nerdtests.com/ft_nt2.php">
+                                <img src="http://www.nerdtests.com/images/badge/nt2/62d98f95b22a9a82.png" alt="NerdTests.com says I'm a Slightly Dorky High Nerd.  Click here to take the Nerd Test, get geeky images and jokes, and write on the nerd forum!">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <footer>
+            <p> 2026 1043's world. </p>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/styles/home.css">
+    <title>1043's world</title>
+    <style>
+      .content-area {
+        display: flex;
+        gap: 20px;
+        flex: 1;
+        flex-direction: column;
+      }
+      .articles-container {
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .oc1 {
+        background-color: rgba(243, 226, 177, 0.541);
+        width: 100%;
+        height: 500px;
+        border-radius: 8px;
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      .oc1picture {
+        background-color: rgba(246, 244, 238, 0.541);
+        flex: 0 0 400px;
+        display: flex;
+        border-radius: 8px;
+        justify-content: center;
+        align-items: center;
+        border: 3px dashed #ab6e1fc8;
+        min-height: 0;
+        box-sizing: border-box;
+      }
+      .oc1picture img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 10px;
+      }
+      .oc1text {
+        background-color: rgba(243, 226, 164, 0.749);
+        color: rgb(105, 58, 0);
+        flex: 1;
+        height: 100%;
+        overflow-y: auto;
+        border-radius: 8px;
+        padding: 16px;
+        border: 2px solid #dfc082;
+        box-sizing: border-box;
+      }
+      .others {
+        background-color: rgba(243, 226, 177, 0.541);
+        width: 100%;
+        height: 350px;
+        border-radius: 8px;
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      .otherstext {
+        background-color: rgba(243, 226, 164, 0.749);
+        flex: 1;
+        height: 100%;
+        overflow-y: auto;
+        border-radius: 8px;
+        padding: 20px;
+        border: 2px solid #dfc082;
+        box-sizing: border-box;
+        color: rgb(105, 58, 0);
+      }
+      .othersimg {
+        flex: 0 0 600px;
+        height: 100%;
+        display: flex;
+        background-color: rgba(246, 244, 238, 0.541);
+        border-radius: 8px;
+        justify-content: center;
+        align-items: center;
+        border: 3px dashed #ab6e1fc8;
+        box-sizing: border-box;
+      }
+      .othersimg img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 10px;
+      }
+      .sidebar {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .modal {
+        display: flex;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+      .modal.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        object-fit: contain;
+      }
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1001;
+      }
+      .clickable-img {
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+      .clickable-img:hover {
+        transform: scale(1.05);
+      }
+      footer {
+        background-color: #f5d45e;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="bgMusic" autoplay loop></audio>
+    <!-- Draggable image -->
+    <img id="dragImg" src="/images/小茌.png" alt="小茌" style="position: absolute; width: 180px; height: auto; cursor: grab; z-index: 9999;">
+    <header>
+      <div class="float">1043's net!</div>
+    </header>
+    <div class="content-wrapper">
+      <nav>
+        <ul>
+          <li><a href="/index.html">home</a></li>
+          <li><a href="/test-site/musics.html">musics</a></li>
+          <li><a href="/test-site/room.html">room</a></li>
+          <li><a href="/test-site/oc.html">my oc!</a></li>
+          <li><a href="/test-site/guestbook.html">guestbook</a></li>
+        </ul>
+        <img
+          src="/images/songcat2.gif"
+          alt="Song Cat"
+          style="
+            margin-top: 150px;
+            width: 60%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+          "
+        />
+      </nav>
+      <main>
+        <div class="content-area">
+          <div class="oc1">
+            <div class="oc1picture">
+              <img src="/images/oc6.png" alt="OC1" />
+            </div>
+            <div class="oc1text">
+              <h2>茌耶兹</h2>
+              <p>
+                本体是一种移动速度很慢的软体动物，以失去灵魂的躯体为食。由于世界变得越来越荒芜，旧的食物资源已经基本被消耗完了，而新的灵魂产生的速度又大大减缓，许多茌耶兹因为移动速度太慢在找到食物前就饿死了。
+              </p>
+              <p>
+                不过这只茌耶兹很幸运，它是在许多死去的同类躯体旁边出生的。融合消化了几具躯体后，这只茌耶兹也渐渐长大了。有一天，它意识到剩下的躯体不够支持它继续存活太久了，于是它花了近一年的时间吃掉了出生地附近所有剩下的同类躯体，之后踏上了寻找其它食物的旅程。虽然它移动得还是很慢，但这一次的进食足以支撑它赶很远的路了。
+              </p>
+              <p>
+                不知过了多久，以躯体为单位的能量被消耗了一具又一具，可新的食物还是没有出现，就当茌耶兹打算定居下来，消耗着残存的不到30%的能量等待死亡时，它看到了一课枯树以及树根附近堆着的一堆还没来得及被风吹散的落叶。茌耶兹吃下了它们。
+              </p>
+              <p>
+                吃下这些东西后茌耶兹发现自己的身体发生了些许变化。它的身体变得轻了些，腹足不那么容易受伤了，同时，它分泌的粘液也变得稀薄了些。这些变化让它得以用更快的速度继续进行它的旅途。（好无厘头的设定）（落叶可以被判定为曾经有过灵魂吗？当叶子还长在树上的时候？）
+              </p>
+              <p>
+                虽然前进的速度变快了，但放眼望去依旧是一片荒芜的景象，寻找新的食物依旧是一件非常紧要的事情。下一次的食物会是什么呢？茌耶兹一边想着，一边向着未知的荒芜出发了。
+              </p>
+            </div>
+          </div>
+          <div class="others">
+            <div class="otherstext">
+              <h3>另外两个还没想好形象的oc</h3>
+              <p>
+               <strong>蜘蛛女王</strong>：从大型运算系统中诞生的硅基智能生命体。实际上蜘蛛女王的意识寄存于整片电子森林之中，即整片电子森林都是蜘蛛女王的“大脑”。而这具外形与蜘蛛有关的机械只是蜘蛛女王从人类遗留下来的影像资料中选取了她最喜欢的形态，再利用一些老旧的零件搭建而成的躯体。她用这具躯体来更为灵活且真实地巡视和观察整片电子森林及其周边的环境。
+              </p>
+              <hr>
+              <p><strong>人偶</strong>：某天蜘蛛女王在电子森林外发现的破旧不堪的棉花人偶。后被蜘蛛女王带回电子森林。蜘蛛女王在经过漫长的研究后研制出了“蛛丝”——一种能与电子森林进行实时通讯的丝状材料。蜘蛛女王用“蛛丝”填补好了人偶破损的地方，又划分了一块独立的电子森林区域，往其中放入了人类行为有关的各种数据和程序，用以制作人偶的“灵魂”。于是能够进行自我思考和灵活移动的人偶就这样诞生了。
+              </p>
+            </div>
+            <div class="othersimg">
+              <img src="/images/others.png" alt="世界设定" class="clickable-img" onclick="openModal('/images/others.png')" />
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <footer>
+      <p>2026 1043's world.</p>
+    </footer>
+
+    <!-- Modal for image zoom -->
+    <div id="imageModal" class="modal" onclick="closeModal(event)">
+      <span class="close-btn" onclick="closeModal(event)">&times;</span>
+      <img id="modalImage" class="modal-content" src="" alt=" enlarged view">
+    </div>
+
+    <script>
+    function openModal(imageSrc) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      modalImg.src = imageSrc;
+      modal.classList.add('active');
+    }
+
+    function closeModal(event) {
+      const modal = document.getElementById('imageModal');
+      if (event.target === modal || event.target.className === 'close-btn') {
+        modal.classList.remove('active');
+      }
+    }
+
+    // Handle keyboard escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeModal(event);
+      }
+    });
+
+    // Draggable image functionality
+    const dragImg = document.getElementById('dragImg');
+    let isDragging = false;
+    let currentX;
+    let currentY;
+    let initialX;
+    let initialY;
+    let xOffset = 0;
+    let yOffset = 0;
+
+    // Set initial position to top-right corner
+    const imgWidth = 250;
+    dragImg.style.left = (window.innerWidth - imgWidth - 20) + 'px';
+    dragImg.style.top = '20px';
+
+    dragImg.addEventListener('mousedown', dragStart);
+    document.addEventListener('mousemove', drag);
+    dragImg.addEventListener('mouseup', dragEnd);
+    dragImg.addEventListener('mouseleave', dragEnd);
+
+    // Touch events for mobile
+    dragImg.addEventListener('touchstart', dragStart);
+    document.addEventListener('touchmove', drag);
+    dragImg.addEventListener('touchend', dragEnd);
+
+    // Handle window resize to reposition image
+    window.addEventListener('resize', function() {
+        if (!isDragging) {
+            dragImg.style.left = (window.innerWidth - imgWidth - 20) + 'px';
+            dragImg.style.top = '20px';
+            dragImg.style.transform = `translate(0px, 0px)`;
+            xOffset = 0;
+            yOffset = 0;
+            currentX = 0;
+            currentY = 0;
+        }
+    });
+
+    function dragStart(e) {
+        if (e.type === "touchstart") {
+            initialX = e.touches[0].clientX - xOffset;
+            initialY = e.touches[0].clientY - yOffset;
+        } else {
+            // Only start dragging if left mouse button is pressed
+            if (e.button !== 0) return; // 0 = left button
+
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+        }
+
+        if (e.target === dragImg) {
+            isDragging = true;
+            dragImg.style.cursor = 'grabbing';
+            e.preventDefault(); // Prevent text selection
+        }
+    }
+
+    function drag(e) {
+        if (isDragging) {
+            e.preventDefault();
+
+            if (e.type === "touchmove") {
+                currentX = e.touches[0].clientX - initialX;
+                currentY = e.touches[0].clientY - initialY;
+            } else {
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+            }
+
+            xOffset = currentX;
+            yOffset = currentY;
+
+            dragImg.style.transform = `translate(${currentX}px, ${currentY}px)`;
+        }
+    }
+
+    function dragEnd(e) {
+        if (isDragging) {
+            isDragging = false;
+            dragImg.style.cursor = 'grab';
+
+            // Reset to initial position when mouse is released outside the image
+            if (e && e.type === 'mouseup' && e.target !== dragImg && e.target !== dragImg.parentElement) {
+                dragImg.style.left = (window.innerWidth - imgWidth - 20) + 'px';
+                dragImg.style.top = '20px';
+                dragImg.style.transform = `translate(0px, 0px)`;
+                xOffset = 0;
+                yOffset = 0;
+                currentX = 0;
+                currentY = 0;
+            }
+        }
+    }
+    </script>
+  </body>
+</html>

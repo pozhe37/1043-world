@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/styles/home.css">
+    <title>1043's world</title>
+    <style>
+      .content-area {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        flex: 1;
+        height: 500px;
+        padding: 0;
+      }
+      .left-content {
+        flex: 2.2;
+        width: auto;
+        display: flex;
+      }
+      .pages{
+        position: relative;
+        flex: 1;
+        height:645px;
+        margin-top: 40px;
+        margin-bottom: 25px;
+        margin-left: 15px;
+        margin-right: 20px;
+        
+      }
+      .pages div{
+          width:100%;
+          height:100%;
+          display:none;
+          align-items: center;
+          overflow-y: auto;
+          border-radius:8px;
+          align-items: center;
+          border-top-left-radius:0;
+          border: dotted #d8a942;
+          border-width:3px;
+          color: #693a00;
+      }
+      input[type="radio"]{
+          display:none;
+      }
+      label{
+          position: absolute;
+          width:150px;
+          font-size:16px;
+          top:-30px;
+          line-height:30px;
+          text-align:center;
+          border-top-left-radius:10px;
+          border-top-right-radius:10px;
+          border: dotted #d8a942;
+          border-width: 3px  3px 0 3px;
+          color:#693a00;
+      }
+      #l1{
+          left:0px;
+          background:#f4e1a7ea;
+      }
+      #l2{
+          left:150px;
+          background:#f9ecbb;
+      }
+      #l3{
+          left:300px;
+          background:#f4e1a7ea;
+      }
+      #l4{
+          left:450px;
+          background:#f9ecbb;
+      }
+      #r1:checked ~ #talk,
+      #r2:checked ~ #eurock,
+      #r3:checked ~ #j-popj-rock,
+      #r4:checked ~ #shu{
+          display:grid;
+      }
+      #talk{
+          background:#f4e1a7ea;
+      }
+      #eurock{
+          background:#f9ecbb;
+      }
+      #j-popj-rock{
+          background:#f4e1a7ea;
+      }
+      #shu{
+          background:#f9ecbb;
+      }
+      .pages div p{
+        font-size:18px;
+        margin: 10;
+        padding: 30px;
+      }
+      .right-content {
+        width: 35%;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .music-player {
+        width: 100%;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        padding-left: 0;
+        padding-right: 0;
+        min-height: 40px;
+        background-color: rgba(246, 222, 142, 0.598);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        border: 2px solid #f7d76d;
+        align-self: flex-end;
+        margin-top: 25px;
+        margin-bottom: 15px;
+      }
+      .playlist-container {
+        /* 设置为与playlist-info相同的百分比宽度 */
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        align-self: flex-end;
+      }
+      .playlist-info {
+        /* 设置为100%宽度，与其它组件保持一致 */
+        width: 100%;
+        height: 100px;
+        background-color: rgb(255, 247, 213);
+        border: 2px dashed #f7d56d;
+        border-radius: 5px;
+        align-self: flex-end;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        color: #693a00;
+        margin-top: 20px;
+        margin-bottom: 25px;
+      }
+      .playlist-title {
+        background-color: rgba(246, 222, 142, 0.598);
+        padding: 12px 15px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #693a00;
+        margin-bottom: 8px;
+        text-align: center;
+        border: 2px solid #f7d76d;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .playlist {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        overflow-y: auto;
+      }
+      .playlist::-webkit-scrollbar {
+        width: 6px;
+      }
+      .playlist::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 3px;
+      }
+      .playlist::-webkit-scrollbar-thumb {
+        background: #d48f61;
+        border-radius: 3px;
+      }
+      .song-item {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 10px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all 0.3s ease;
+        font-size: 13px;
+        color: #693a00;
+      }
+      .song-item:hover {
+        background-color: rgba(247, 215, 109, 0.3);
+      }
+      .song-item.active {
+        background-color: rgba(247, 215, 109, 0.6);
+        border-left: 4px solid #f7d76d;
+      }
+      .song-title {
+        flex: 1;
+      }
+      .song-duration {
+        font-size: 12px;
+        color: #999;
+        margin-left: 10px;
+      }
+      .player-btn {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        border: none;
+        background-color: #f7d76d;
+        color: white;
+        font-size: 22px;
+        line-height: 1;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      }
+      .player-btn:hover {
+        background-color: #d48f61;
+        transform: scale(1.1);
+      }
+      .player-btn:active {
+        transform: scale(0.95);
+      }
+      .play-btn {
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+      }
+      .articles-container {
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .sidebar {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      footer {
+        background-color: #f5d45e;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="float">1043's net!</div>
+    </header>
+    <div class="content-wrapper">
+      <nav>
+        <ul>
+          <li><a href="/index.html">home</a></li>
+          <li><a href="/test-site/musics.html">musics</a></li>
+          <li><a href="/test-site/room.html">room</a></li>
+          <li><a href="/test-site/oc.html">my oc!</a></li>
+          <li><a href="/test-site/guestbook.html">guestbook</a></li>
+        </ul>
+        <img
+          src="/images/songcat2.gif"
+          alt="Song Cat"
+          style="
+            margin-top: 150px;
+            width: 60%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+          "
+        />
+      </nav>
+      <main>
+        <audio id="audioPlayer" preload="auto"></audio>
+        <div class="content-area">
+          <div class="left-content">
+            <div class="pages">
+              <input type="radio" name="tabs" id="r1" checked>
+              <input type="radio" name="tabs" id="r2">
+              <input type="radio" name="tabs" id="r3">
+              <input type="radio" name="tabs" id="r4">
+              <label for="r1" id="l1">♩</label>
+              <label for="r2" id="l2">欧美摇滚</label>
+              <label for="r3" id="l3">j-pop/j-rock</label>
+              <label for="r4" id="l4">术曲</label>
+              <div id="talk">
+                  <p>我日常大部分时间都在听音乐，尽管我大学基本都呆在宿舍下桌的遮帘里，坐在我的电脑前，但只要戴上耳机，听着不同旋律在耳边响起,我自认为我已经完全能将“乏味”这一词从形容我日常生活的词语中排除在外了。
+                  <br><br>我平常听的音乐种类主要有欧美摇滚，日语流行/日系摇滚以及术曲。这些音乐使得我更深刻地去喜悦，去愤怒，去悲伤，也带我体会了一些我未曾经历过的情感。在我烦躁焦虑的时候，我总会先任由音乐将我的负面情绪放至最大，等到歌曲快要结束节奏渐渐放缓的时候我的情绪再随之平息。<br><br>我在不同的曲风标签下记录了一些我喜欢的乐队/p主,请点击进行查看！此外，我平时使用的音乐播放平台是网易云，我的用户名是Castrophany，欢迎来收听我的红心歌单！</p>
+              </div>
+              <div id="eurock">
+                  <p>我开始听欧美摇滚是在我高中的时候，依稀记得契机是某个周末在家刷手书的时候听到了Gorillaz的On Melancholy Hill觉得好听遂听歌识曲，后又顺着这首歌评论区里的神秘蛋黄头ok先生找到了Blur，在听完Song 2和看完Coffee & TV的mv后，我开始对Blur上头，从此掉入摇滚的深坑一去不复返。<br><br>中学时期我最喜欢的几个乐队我记得是Oasis,My Chemical Romance(我当时还画了The Black Parade专辑封面上的乐队logo并把它剪下来贴在了笔筒上面),Joy Division,Sonic Youth。除此之外还记得有一首叫Fear of the Dark的歌，我听的那首还是现场版的，它被我下进了我的mp3里面，陪我度过了大多数在宿舍打小夜灯补作业的夜晚(现在回想起来有点好笑)。<br><br>总之我很庆幸我在高中接触到了欧美摇滚乐，它陪我度过了诸如作文没写完被罚站，泡面还没来得及泡就被宿管阿姨丢进垃圾桶，莲花被新来的校长种成矩形阵列等一系列糟糕的日子。我现在依然爱听欧美摇滚乐，我最喜欢的乐队依然有Sonic Youth和Joy Division,它们于我的情绪来说相当于是消炎药般的存在。同时我现在最喜欢的乐队还有Blur，如果说Sonic Youth和Joy Division是消炎药的话那Blur就相当于是麻药了，听它的时候我能非常平静甚至有点乐呵呵地处理我手头的事情。</p>
+              </div>
+              <div id="j-popj-rock">
+                  <p>回想起来我听的第一首日系摇滚是蘑菇帝国的校园小说，当时主唱佐藤千亚妃的独特的嗓音和歌曲里传达的情感深深吸引了我，之后我便听了蘑菇帝国的更多作品，也开始接触其他日系摇滚乐队。<br><br>我喜欢的乐队主要有<strong>Number Girl:</strong>很适合在夏天听的乐队，我非常喜欢他们乐队的架子鼓，他们歌曲的旋律也特别洗脑（我曾在日推听了一遍<em>Tombo the electric bloodred</em>结果这首歌的前奏莫名其妙在我脑子里循环了好几天，后面我找了好久才找到这首歌叫什么名儿）<br><strong>神聖かまってちゃん:</strong>他们歌曲里的键盘以及弦乐总是让我联想到例如阳光照射下的多面晶体，记录亮片下落过程的镜头，万花筒等一系列变化莫测闪闪发光的的东西。他们乐队我最喜欢的歌是<em>派通文具店</em>，这首歌的旋律真的很好听。<br><strong>THE MUSMUS:</strong>主唱的声音非常具有感染力，无论你内心积压着什么情绪，愤怒也好，思念也好，试试去听THE MUSMUS吧，这些情绪都可以借由主唱的嘶吼和吉他的轰鸣宣泄掉。<br><br>大二的时候，我开始听起了椎名林檎和东京事变，从听第一首<em>眩晕</em>到往后的五六个月的时间，每隔一段时期我都能点开几首我没听过的椎名林檎的曲子，在爆发出“卧槽好好听”的赞叹后开始疯狂地单曲循环。我最喜欢的椎名林檎的专辑是<em>平成風俗</em>和<em>勝訴ストリップ</em>。<em>平成風俗</em>中华丽而宏伟的编曲美得令人窒息，而<em>勝訴ストリップ</em>所包含的<em>自我、罪与罚、石膏、依存症、闇に降る雨</em>更是我一次又一次循环的曲子。</p>
+              </div>
+              <div id="shu">
+                  <p>第一个喜欢听的p主是煮ル果実，入坑曲是<em>灰Φ倶楽部</em>，最喜欢的曲子是<em>芳香</em>。后来大二寒假跟着我妹打pjsk的时候听了许多例如炉心融解、右肩之蝶、春嵐等比较经典的曲子。之后我又听了更多术曲，我比较喜欢的p主有ナユタン星人、picdo、椎名p、じん、wowaka、r-906、煮ル果実、胃弱（我妹最喜欢的p主，我也喜欢听，我最喜欢的胃弱曲是直至眼泪干涸）。</p>
+              </div>
+            </div>
+          </div>
+          <div class="right-content">
+            <div class="playlist-info">从我的歌单里挑了一些音乐放在这里，请听♪(´∇`*)</div>
+            <div class="playlist-container">
+              <div class="playlist-title">播放列表</div>
+              <div class="playlist" id="playlist">
+                <div class="song-item" data-index="0" ondblclick="playSong(0)">
+                  <span class="song-title">Ceremony</span>
+                  <span class="song-duration">4:23</span>
+                </div>
+                <div class="song-item" data-index="1" ondblclick="playSong(1)">
+                  <span class="song-title">Graveyard Memory</span>
+                  <span class="song-duration">5:14</span>
+                </div>
+                <div class="song-item" data-index="2" ondblclick="playSong(2)">
+                  <span class="song-title">毒味</span>
+                  <span class="song-duration">4:03</span>
+                </div>
+                <div class="song-item" data-index="3" ondblclick="playSong(3)">
+                  <span class="song-title">机拐岛</span>
+                  <span class="song-duration">4:01</span>
+                </div>
+                <div class="song-item" data-index="4" ondblclick="playSong(4)">
+                  <span class="song-title">Star overhead</span>
+                  <span class="song-duration">3:48</span>
+                </div>
+                <div class="song-item" data-index="5" ondblclick="playSong(5)">
+                  <span class="song-title">Dreams</span>
+                  <span class="song-duration">4:15</span>
+                </div>
+                <div class="song-item" data-index="6" ondblclick="playSong(6)">
+                  <span class="song-title">Summertime</span>
+                  <span class="song-duration">4:06</span>
+                </div>
+                <div class="song-item" data-index="7" ondblclick="playSong(7)">
+                  <span class="song-title">Under Pressure</span>
+                  <span class="song-duration">4:04</span>
+                </div>
+              </div>
+            </div>
+            <div class="music-player">
+              <button class="player-btn" onclick="previousTrack()">⏮</button>
+              <button
+                class="player-btn play-btn"
+                onclick="togglePlay()"
+                id="playBtn"
+              >
+                ▶
+              </button>
+              <button class="player-btn" onclick="nextTrack()">⏭</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <footer>
+      <p> 2026 1043's world. </p>
+    </footer>
+
+    <script>
+      // Music player functionality
+      let isPlaying = false;
+      let currentTrack = 0;
+      const audioPlayer = document.getElementById("audioPlayer");
+      const playBtn = document.getElementById("playBtn");
+
+      // Initialize the music list with 8 songs
+      const musicList = [
+        {         
+          title: "Ceremony",
+          duration: "4:23",
+          url: "/musics/Ceremony.mp3",
+        },
+        {
+          title: "Graveyard Memory",
+          duration: "5:14",
+          url: "/musics/Graveyard Memory.mp3",
+        },
+        {
+          title: "毒味",
+          duration: "4:03",
+          url: "/musics/毒味.mp3",
+        },
+        {
+          title: "机拐岛",
+          duration: "4:01",
+          url: "/musics/机拐岛.mp3",
+        },
+        {
+          title: "Star overhead",
+          duration: "3:48",
+          url: "/musics/Star overhead.mp3",
+        },
+        {
+          title: "Dreams",
+          duration: "4:15",
+          url: "/musics/Dreams.mp3",
+        },
+        {
+          title: "Summertime",
+          duration: "4:06",
+          url: "/musics/Summertime.mp3",
+        },
+        {
+          title: "Under Pressure",
+          duration: "4:04",
+          url: "/musics/Under Pressure.mp3",
+        },
+      ];
+
+      function togglePlay() {
+        if (isPlaying) {
+          audioPlayer.pause();
+          isPlaying = false;
+          playBtn.textContent = "▶";
+        } else {
+          audioPlayer.src = musicList[currentTrack].url;
+          audioPlayer.play();
+          isPlaying = true;
+          playBtn.textContent = "⏸";
+        }
+        console.log("Playing:", isPlaying);
+        console.log("Current track:", musicList[currentTrack].title);
+      }
+
+      function previousTrack() {
+        currentTrack = (currentTrack - 1 + musicList.length) % musicList.length;
+        if (isPlaying) {
+          audioPlayer.src = musicList[currentTrack].url;
+          audioPlayer.play();
+        }
+        updatePlaylist();
+        console.log("Previous track:", musicList[currentTrack].title);
+      }
+
+      function nextTrack() {
+        currentTrack = (currentTrack + 1) % musicList.length;
+        if (isPlaying) {
+          audioPlayer.src = musicList[currentTrack].url;
+          audioPlayer.play();
+        }
+        updatePlaylist();
+        console.log("Next track:", musicList[currentTrack].title);
+      }
+
+      function playSong(index) {
+        currentTrack = index;
+        audioPlayer.src = musicList[currentTrack].url;
+        audioPlayer.play();
+        isPlaying = true;
+        playBtn.textContent = "⏸";
+        updatePlaylist();
+        console.log("Playing track:", musicList[currentTrack].title);
+        console.log("File path:", musicList[currentTrack].url);
+      }
+
+      function updatePlaylist() {
+        const songItems = document.querySelectorAll(".song-item");
+        songItems.forEach((item, index) => {
+          if (index === currentTrack) {
+            item.classList.add("active");
+          } else {
+            item.classList.remove("active");
+          }
+        });
+      }
+
+      // Add event listeners for audio player
+      audioPlayer.addEventListener("ended", function () {
+        console.log("Track ended, auto-playing next track");
+        nextTrack();
+      });
+
+      audioPlayer.addEventListener("error", function (e) {
+        console.error("Audio error:", e);
+        console.log("Failed to load:", musicList[currentTrack].url);
+      });
+
+      audioPlayer.addEventListener("play", function () {
+        console.log("Started playing:", musicList[currentTrack].title);
+      });
+
+      audioPlayer.addEventListener("pause", function () {
+        console.log("Paused:", musicList[currentTrack].title);
+      });
+
+      // Initialize the playlist highlight
+      updatePlaylist();
+
+      console.log("Music player initialized with", musicList.length, "songs");
+    </script>
+  </body>
+</html>
