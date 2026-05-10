@@ -364,12 +364,13 @@
       // Music player functionality
       let isPlaying = false;
       let currentTrack = 0;
+      let currentTime = 0; // 保存当前播放时间位置
       const audioPlayer = document.getElementById("audioPlayer");
       const playBtn = document.getElementById("playBtn");
 
       // Initialize the music list with 8 songs
       const musicList = [
-        {         
+        {
           title: "Ceremony",
           duration: "4:23",
           url: "/1043-world/musics/Ceremony.mp3",
@@ -413,21 +414,27 @@
 
       function togglePlay() {
         if (isPlaying) {
+          // 暂停时保存当前时间位置
+          currentTime = audioPlayer.currentTime;
           audioPlayer.pause();
           isPlaying = false;
           playBtn.textContent = "▶";
         } else {
+          // 恢复播放时从保存的时间位置继续
           audioPlayer.src = musicList[currentTrack].url;
+          audioPlayer.currentTime = currentTime;
           audioPlayer.play();
           isPlaying = true;
           playBtn.textContent = "⏸";
         }
         console.log("Playing:", isPlaying);
         console.log("Current track:", musicList[currentTrack].title);
+        console.log("Current time:", currentTime);
       }
 
       function previousTrack() {
         currentTrack = (currentTrack - 1 + musicList.length) % musicList.length;
+        currentTime = 0; // 切换歌曲时重置时间位置
         if (isPlaying) {
           audioPlayer.src = musicList[currentTrack].url;
           audioPlayer.play();
@@ -438,6 +445,7 @@
 
       function nextTrack() {
         currentTrack = (currentTrack + 1) % musicList.length;
+        currentTime = 0; // 切换歌曲时重置时间位置
         if (isPlaying) {
           audioPlayer.src = musicList[currentTrack].url;
           audioPlayer.play();
@@ -448,6 +456,7 @@
 
       function playSong(index) {
         currentTrack = index;
+        currentTime = 0; // 选择新歌曲时重置时间位置
         audioPlayer.src = musicList[currentTrack].url;
         audioPlayer.play();
         isPlaying = true;
@@ -485,6 +494,13 @@
 
       audioPlayer.addEventListener("pause", function () {
         console.log("Paused:", musicList[currentTrack].title);
+      });
+
+      // Add event listener to update current time when playing
+      audioPlayer.addEventListener("timeupdate", function() {
+        if (isPlaying) {
+          currentTime = audioPlayer.currentTime;
+        }
       });
 
       // Initialize the playlist highlight
